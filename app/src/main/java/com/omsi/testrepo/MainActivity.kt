@@ -13,4 +13,6 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.main_text_view).text = Home().getResourceValue()
     }
+
+
 }

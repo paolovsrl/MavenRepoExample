@@ -3,6 +3,9 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven {
+            url "https://raw.githubusercontent.com/paolovsrl/mvn-repo/master"
+        }
     }
 }
 dependencyResolutionManagement {
@@ -10,8 +13,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url "https://raw.githubusercontent.com/paolovsrl/mvn-repo/master"
+        }
     }
 }
 rootProject.name = "TestRepo"
 include ':app'
+
+//Just to keep them in mind
 include ':app:brumm'
+include ':app:nonno'
