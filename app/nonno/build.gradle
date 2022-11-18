@@ -22,6 +22,10 @@ publishing {
     }
 }
 
+task rebuildAndPublish(dependsOn: [publish]){
+
+}
+
 /* TODO create a task to clean build and publish only current
 task cleanBuildPublish(type: Copy) {
     TestRepo:app:nonno [clean build publish]

@@ -68,3 +68,8 @@ afterEvaluate {
         }
     }
 }
+
+
+task rebuildAndPublish(dependsOn: [clean, build, publish]){
+
+}
