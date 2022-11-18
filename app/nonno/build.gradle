@@ -5,7 +5,7 @@ plugins {
 publishing {
     publications {
         nonnoLibrary(MavenPublication) {
-            groupId 'com.omsi'
+            groupId 'com.omsi.lib'
             artifactId 'nonno'
             version '1.0.1'
             artifact("$projectDir/nonno.aar")

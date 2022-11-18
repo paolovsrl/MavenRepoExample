@@ -40,7 +40,7 @@ android {
 
 
 dependencies {
-    api 'com.omsi:nonno:1.0.1' //api will expose the dependency
+    api 'com.omsi.lib:nonno:1.0' //api will expose the dependency
 }
 
 
@@ -49,9 +49,9 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                groupId 'com.omsi'
+                groupId 'com.omsi.lib'
                 artifactId 'brumm'
-                version '1.0.3'
+                version '1.0.1'
                 //artifact(sourceJar)
               //  artifact("$buildDir/outputs/aar/brumm-release.aar")
                 // artifact("$projectDir/nonno/nonno.aar")
