@@ -1,11 +1,23 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-        maven {
-            url "https://raw.githubusercontent.com/paolovsrl/mvn-repo/master"
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
         }
+        mavenCentral()
+        gradlePluginPortal()
+        /*
+         //In case of package
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/paolovsrl/mavenrepoexample")
+        }
+        */
+        //dedicated (public - no auth) repository
+        maven {url "https://raw.githubusercontent.com/paolovsrl/mvn-repo-public/release"}
     }
 }
 dependencyResolutionManagement {
@@ -13,14 +25,24 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        /*
+        //In case of github package
         maven {
-            url "https://raw.githubusercontent.com/paolovsrl/mvn-repo/master"
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/paolovsrl/mavenrepoexample")
+            credentials{
+                username = ""
+                password = ""
+            }
         }
+        */
+        //dedicated (public - no auth) repository
+        maven {url "https://raw.githubusercontent.com/paolovsrl/mvn-repo-public/release"}
     }
 }
-rootProject.name = "TestRepo"
-include ':app'
 
-//Just to keep them in mind
-include ':app:brumm'
-include ':app:nonno'
+rootProject.name = "MavenRepoExample"
+include ':app'
+//added only for visibility, but in project are remote dependencies
+include ':dummymodule'
+include ':dummyaar'

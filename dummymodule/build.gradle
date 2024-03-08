@@ -1,13 +1,12 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
     id 'maven-publish'
 }
 
 android {
-   namespace 'com.omsi.brumm'
-    compileSdk 32
+    namespace 'com.pab.dummymodule'
+    compileSdk 34
 
     defaultConfig {
         minSdk 21
@@ -21,13 +20,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     kotlinOptions {
         jvmTarget = '1.8'
     }
 
     publishing {
         singleVariant('release') {
-          //  withSourcesJar()
+            //  withSourcesJar()
             //withJavadocJar()
         }
         /*multipleVariants {
@@ -39,9 +42,13 @@ android {
 }
 
 
+
 dependencies {
-    api 'com.omsi.lib:nonno:1.0' //api will expose the dependency
+    //api (seen by other modules ~public) or implementation (only seen by this module ~private)
+    implementation "com.something:dummy-aar:1.0.0"
 }
+
+
 
 
 //Publishing to a local Maven Repository
@@ -49,27 +56,18 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                groupId 'com.omsi.lib'
-                artifactId 'brumm'
-                version '1.0.1'
-                //artifact(sourceJar)
-              //  artifact("$buildDir/outputs/aar/brumm-release.aar")
-                // artifact("$projectDir/nonno/nonno.aar")
+                groupId 'com.something'
+                artifactId 'dummy-module'
+                version '1.0.0'
                 from components.getByName('release')
             }
         }
 
         repositories {
             maven {
-                name = 'myRepo'
-                //url = layout.buildDirectory.dir("repo")
-                url = "D:\\AndroidStudioProjects\\OMSI\\repo"
+                name = 'LocalRepo'
+                url = "D:\\AndroidStudioProjects\\repositories"
             }
         }
     }
-}
-
-
-task rebuildAndPublish(dependsOn: [clean, build, publish]){
-
 }

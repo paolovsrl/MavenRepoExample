@@ -1,0 +1,45 @@
+plugins {
+    id 'maven-publish'
+}
+
+publishing {
+    publications {
+        dummyAARLibrary(MavenPublication) {
+            groupId 'com.something'
+            artifactId 'dummy-aar'
+            version '1.0.0'
+            artifact("$projectDir/dummy.aar")
+        }
+
+    }
+
+    repositories {
+        //Publish directly to a github repo/packages using an access token
+        /* maven {
+             name = "GitHubPackages"
+             url = uri("https://maven.pkg.github.com/paolovsrl/mavenrepoexample")
+             credentials {
+                 username = getSecretKeys()['USERNAME']
+                 password = getSecretKeys()['TOKEN']
+                 //TOKEN (classic) must be generated with at least:
+                 // repo, write:*packages, read:packages permissions.
+             }
+         }
+          */
+
+    //I personally prefer to push everything to a dedicated repo, because github forces you to authenticate before downloading the packages
+
+        //Publish to local repository, eventually push it later to a github repo
+        maven {
+            name = 'LocalRepo'
+            url = "D:\\AndroidStudioProjects\\repositories"
+        }
+    }
+}
+
+def getSecretKeys(){
+    def keyFile = file("D:\\\\AndroidStudioProjects\\\\KEYS\\\\mavenrepoexample.properties")
+    def secretKeys = new Properties()
+    secretKeys.load(new FileInputStream(keyFile))
+    return secretKeys
+}
